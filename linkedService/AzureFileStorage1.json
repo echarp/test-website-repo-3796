@@ -5,7 +5,7 @@
 		"type": "AzureFileStorage",
 		"typeProperties": {
 			"serviceEndpoint": "https://stafaktoprod.file.core.windows.net/",
-			"fileShare": "/mount/stafaktoprod/sts-afakto-prod"
+			"fileShare": "sts-afakto-prod"
 		}
 	}
 }
