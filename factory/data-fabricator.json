@@ -1,0 +1,9 @@
+{
+	"name": "data-fabricator",
+	"location": "francecentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "664dd79b-6048-443c-9f69-27b1108aad4a",
+		"tenantId": "ce57ebe3-a63d-4708-b5cf-c274b48bd26c"
+	}
+}
