@@ -10,10 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureFileStorageLocation",
-				"fileName": {
-					"value": "@concat('Test_', formatDateTime(utcnow(), 'yyyy-dd-MM'))",
-					"type": "Expression"
-				},
 				"folderPath": "buyer/org_equwjUP8hxcw3o5v"
 			},
 			"columnDelimiter": ",",
@@ -21,6 +17,43 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "COMPANY_CODE",
+				"type": "String"
+			},
+			{
+				"name": "BUYER_CODE",
+				"type": "String"
+			},
+			{
+				"name": "INV_TYPE",
+				"type": "String"
+			},
+			{
+				"name": "INV_NUMBER",
+				"type": "String"
+			},
+			{
+				"name": "INV_DATE",
+				"type": "String"
+			},
+			{
+				"name": "DUE_DATE",
+				"type": "String"
+			},
+			{
+				"name": "AMOUNT",
+				"type": "String"
+			},
+			{
+				"name": "BALANCE",
+				"type": "String"
+			},
+			{
+				"name": "PAYMENT_METHOD ",
+				"type": "String"
+			}
+		]
 	}
 }
