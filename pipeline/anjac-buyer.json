@@ -154,7 +154,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "anjac_db",
+						"referenceName": "anjac_buyer_db",
 						"type": "DatasetReference"
 					}
 				],

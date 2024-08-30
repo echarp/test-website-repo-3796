@@ -1,5 +1,5 @@
 {
-	"name": "anjac_db",
+	"name": "anjac_buyer_db",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AnjacDB",
