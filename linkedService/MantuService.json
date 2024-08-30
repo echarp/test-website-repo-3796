@@ -17,10 +17,6 @@
 				"secretName": "org-mantu-client-secret"
 			},
 			"tokenEndpoint": "db310d124a8e428bbad43896bd13adc0"
-		},
-		"connectVia": {
-			"referenceName": "integrationRuntime1",
-			"type": "IntegrationRuntimeReference"
 		}
 	}
 }
