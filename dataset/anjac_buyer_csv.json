@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureFileStorageLocation",
 				"fileName": {
-					"value": "@utcNow('yyyy')",
+					"value": "@concat('Test_', formatDateTime(utcnow(), 'yyyy-dd-MM'))",
 					"type": "Expression"
 				},
 				"folderPath": "buyer/org_equwjUP8hxcw3o5v"
