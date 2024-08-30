@@ -10,10 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureFileStorageLocation",
-				"fileName": {
-					"value": "@utcnow()",
-					"type": "Expression"
-				},
 				"folderPath": "buyer/org_equwjUP8hxcw3o5v"
 			},
 			"columnDelimiter": ",",
