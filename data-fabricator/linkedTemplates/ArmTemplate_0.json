@@ -15,13 +15,41 @@
 			"type": "secureString",
 			"metadata": "Chaîne sécurisée pour « connectionString » de « AzureFileStorage2 »"
 		},
+		"AzureFileStorage3_connectionString": {
+			"type": "secureString",
+			"metadata": "Chaîne sécurisée pour « connectionString » de « AzureFileStorage3 »"
+		},
 		"AzurePostgreSql1_connectionString": {
 			"type": "secureString",
 			"metadata": "Chaîne sécurisée pour « connectionString » de « AzurePostgreSql1 »"
 		},
+		"AnjacDB_password": {
+			"type": "secureString",
+			"metadata": "Chaîne sécurisée pour « password » de « AnjacDB »"
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kv-fjmihhsvghnkwpb-prod.vault.azure.net/"
+		},
+		"MantuService_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.mantu.com/afakto/git-v1.0/api/v1.0/accounting/invoices/query"
+		},
+		"MantuService_properties_typeProperties_clientId": {
+			"type": "string",
+			"defaultValue": "VCespbhhhd4cQSSVCo0uutgZNkZosRtu"
+		},
+		"AnjacDB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "anjacbi.database.windows.net"
+		},
+		"AnjacDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AnjacInfocentre"
+		},
+		"AnjacDB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Mantu"
 		}
 	},
 	"variables": {
@@ -57,6 +85,20 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureFileStorage3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFileStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureFileStorage3_connectionString')]",
+					"fileShare": "file-exchange"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -80,6 +122,35 @@
 					"connectionString": "[parameters('AzurePostgreSql1_connectionString')]"
 				}
 			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger1')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 15,
+					"startTime": "2024-08-30T14:00:00Z",
+					"delay": "00:00:00",
+					"maxConcurrency": 50,
+					"retryPolicy": {
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/default')]",
+			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
+			"apiVersion": "2018-06-01",
+			"properties": {},
 			"dependsOn": []
 		},
 		{
@@ -125,7 +196,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureFileStorageLocation",
-						"fileName": "test.txt",
+						"fileName": " ",
 						"folderPath": "aaa"
 					},
 					"columnDelimiter": ",",
@@ -150,103 +221,228 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/CopyPipeline_sej')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/anjac_buyer_csv')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"activities": [
-					{
-						"name": "Copy_sej",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "aaa/test.txt"
-							},
-							{
-								"name": "Destination",
-								"value": "aaa/bbb.csv"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureFileStorageReadSettings",
-									"recursive": false,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings",
-									"skipLineCount": 0
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureFileStorageWriteSettings",
-									"copyBehavior": "PreserveHierarchy"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"enableSkipIncompatibleRow": true,
-							"validateDataConsistency": true,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "SourceDataset_sej",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DestinationDataset_sej",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
+				"linkedServiceName": {
+					"referenceName": "AzureFileStorage2",
+					"type": "LinkedServiceReference"
 				},
-				"annotations": []
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureFileStorageLocation",
+						"fileName": {
+							"value": "@concat(utcNow('yyyyMMdd'), 'buyers.csv')",
+							"type": "Expression"
+						},
+						"folderPath": "buyer/org_equwjUP8hxcw3o5v"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "COMPANY_CODE",
+						"type": "String"
+					},
+					{
+						"name": "BUYER_CODE",
+						"type": "String"
+					},
+					{
+						"name": "INV_TYPE",
+						"type": "String"
+					},
+					{
+						"name": "INV_NUMBER",
+						"type": "String"
+					},
+					{
+						"name": "INV_DATE",
+						"type": "String"
+					},
+					{
+						"name": "DUE_DATE",
+						"type": "String"
+					},
+					{
+						"name": "AMOUNT",
+						"type": "String"
+					},
+					{
+						"name": "BALANCE",
+						"type": "String"
+					},
+					{
+						"name": "PAYMENT_METHOD ",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_sej')]",
-				"[concat(variables('factoryId'), '/datasets/DestinationDataset_sej')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureFileStorage2')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"name": "[concat(parameters('factoryName'), '/MantuService')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('MantuService_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "OAuth2ClientCredential",
+					"clientId": "[parameters('MantuService_properties_typeProperties_clientId')]",
+					"clientSecret": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "org-mantu-client-secret"
+					},
+					"tokenEndpoint": "db310d124a8e428bbad43896bd13adc0"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "France Central",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 10,
+							"cleanup": false,
+							"customProperties": []
+						},
+						"pipelineExternalComputeScaleProperties": {
+							"timeToLive": 60,
+							"numberOfPipelineNodes": 1,
+							"numberOfExternalNodes": 1
+						}
+					}
+				},
+				"managedVirtualNetwork": {
+					"type": "ManagedVirtualNetworkReference",
+					"referenceName": "default"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AnjacDB')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('AnjacDB_properties_typeProperties_server')]",
+					"database": "[parameters('AnjacDB_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('AnjacDB_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('AnjacDB_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/anjac_buyer_db')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AnjacDB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "COMPANY_CODE",
+						"type": "varchar"
+					},
+					{
+						"name": "BUYER_CODE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "INV_TYPE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "INV_NUMBER",
+						"type": "nvarchar"
+					},
+					{
+						"name": "INV_DATE",
+						"type": "date"
+					},
+					{
+						"name": "DUE_DATE",
+						"type": "date"
+					},
+					{
+						"name": "AMOUNT",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Balance",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "PAYMENT_METHOD ",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BalanceClient"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AnjacDB')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/anjac-buyer')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy data1",
+						"name": "Anjac buyer",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -259,48 +455,151 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureFileStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": true
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureFileStorageWriteSettings",
-									"copyBehavior": "PreserveHierarchy"
+									"type": "AzureFileStorageWriteSettings"
 								},
 								"formatSettings": {
 									"type": "DelimitedTextWriteSettings",
 									"quoteAllText": true,
-									"fileExtension": ".txt"
+									"fileExtension": ""
 								}
 							},
 							"enableStaging": false,
 							"translator": {
 								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "COMPANY_CODE",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "COMPANY_CODE",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "BUYER_CODE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "BUYER_CODE",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "INV_TYPE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "INV_TYPE",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "INV_NUMBER",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "INV_NUMBER",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "INV_DATE",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "INV_DATE",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DUE_DATE",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "DUE_DATE",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "AMOUNT",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "AMOUNT",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Balance",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "BALANCE",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PAYMENT_METHOD ",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "PAYMENT_METHOD ",
+											"type": "String",
+											"physicalType": "String"
+										}
+									}
+								],
 								"typeConversion": true,
 								"typeConversionSettings": {
 									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
+									"treatBooleanAsNumber": false,
+									"dateFormat": "aaaa-MM-jj"
 								}
 							}
 						},
 						"inputs": [
 							{
-								"referenceName": "SourceDataset_sej",
+								"referenceName": "anjac_buyer_db",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DestinationDataset_sej",
+								"referenceName": "anjac_buyer_csv",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -313,8 +612,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_sej')]",
-				"[concat(variables('factoryId'), '/datasets/DestinationDataset_sej')]"
+				"[concat(variables('factoryId'), '/datasets/anjac_buyer_db')]",
+				"[concat(variables('factoryId'), '/datasets/anjac_buyer_csv')]"
 			]
 		}
 	]

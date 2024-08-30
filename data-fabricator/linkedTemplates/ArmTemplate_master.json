@@ -7,6 +7,10 @@
 			"metadata": "Nom de fabrique de données",
 			"defaultValue": "data-fabricator"
 		},
+		"AnjacDB_password": {
+			"type": "secureString",
+			"metadata": "Chaîne sécurisée pour « password » de « AnjacDB »"
+		},
 		"AzureFileStorage1_connectionString": {
 			"type": "secureString",
 			"metadata": "Chaîne sécurisée pour « connectionString » de « AzureFileStorage1 »"
@@ -15,13 +19,37 @@
 			"type": "secureString",
 			"metadata": "Chaîne sécurisée pour « connectionString » de « AzureFileStorage2 »"
 		},
+		"AzureFileStorage3_connectionString": {
+			"type": "secureString",
+			"metadata": "Chaîne sécurisée pour « connectionString » de « AzureFileStorage3 »"
+		},
 		"AzurePostgreSql1_connectionString": {
 			"type": "secureString",
 			"metadata": "Chaîne sécurisée pour « connectionString » de « AzurePostgreSql1 »"
 		},
+		"AnjacDB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "anjacbi.database.windows.net"
+		},
+		"AnjacDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AnjacInfocentre"
+		},
+		"AnjacDB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Mantu"
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kv-fjmihhsvghnkwpb-prod.vault.azure.net/"
+		},
+		"MantuService_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.mantu.com/afakto/git-v1.0/api/v1.0/accounting/invoices/query"
+		},
+		"MantuService_properties_typeProperties_clientId": {
+			"type": "string",
+			"defaultValue": "VCespbhhhd4cQSSVCo0uutgZNkZosRtu"
 		},
 		"containerUri": {
 			"type": "string",
@@ -56,11 +84,32 @@
 					"AzureFileStorage2_connectionString": {
 						"value": "[parameters('AzureFileStorage2_connectionString')]"
 					},
+					"AzureFileStorage3_connectionString": {
+						"value": "[parameters('AzureFileStorage3_connectionString')]"
+					},
 					"AzurePostgreSql1_connectionString": {
 						"value": "[parameters('AzurePostgreSql1_connectionString')]"
 					},
+					"AnjacDB_password": {
+						"value": "[parameters('AnjacDB_password')]"
+					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"MantuService_properties_typeProperties_url": {
+						"value": "[parameters('MantuService_properties_typeProperties_url')]"
+					},
+					"MantuService_properties_typeProperties_clientId": {
+						"value": "[parameters('MantuService_properties_typeProperties_clientId')]"
+					},
+					"AnjacDB_properties_typeProperties_server": {
+						"value": "[parameters('AnjacDB_properties_typeProperties_server')]"
+					},
+					"AnjacDB_properties_typeProperties_database": {
+						"value": "[parameters('AnjacDB_properties_typeProperties_database')]"
+					},
+					"AnjacDB_properties_typeProperties_userName": {
+						"value": "[parameters('AnjacDB_properties_typeProperties_userName')]"
 					}
 				}
 			},

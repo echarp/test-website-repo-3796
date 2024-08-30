@@ -5,17 +5,38 @@
 		"factoryName": {
 			"value": "data-fabricator"
 		},
+		"AnjacDB_password": {
+			"value": ""
+		},
 		"AzureFileStorage1_connectionString": {
 			"value": ""
 		},
 		"AzureFileStorage2_connectionString": {
 			"value": ""
 		},
+		"AzureFileStorage3_connectionString": {
+			"value": ""
+		},
 		"AzurePostgreSql1_connectionString": {
 			"value": ""
 		},
+		"AnjacDB_properties_typeProperties_server": {
+			"value": "anjacbi.database.windows.net"
+		},
+		"AnjacDB_properties_typeProperties_database": {
+			"value": "AnjacInfocentre"
+		},
+		"AnjacDB_properties_typeProperties_userName": {
+			"value": "Mantu"
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://kv-fjmihhsvghnkwpb-prod.vault.azure.net/"
+		},
+		"MantuService_properties_typeProperties_url": {
+			"value": "https://api.mantu.com/afakto/git-v1.0/api/v1.0/accounting/invoices/query"
+		},
+		"MantuService_properties_typeProperties_clientId": {
+			"value": "VCespbhhhd4cQSSVCo0uutgZNkZosRtu"
 		}
 	}
 }
