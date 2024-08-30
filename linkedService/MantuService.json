@@ -14,7 +14,7 @@
 					"referenceName": "AzureKeyVault1",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "org_mantu"
+				"secretName": "org-mantu-client-secret"
 			},
 			"tokenEndpoint": "db310d124a8e428bbad43896bd13adc0"
 		},
