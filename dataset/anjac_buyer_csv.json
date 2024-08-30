@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureFileStorageLocation",
-				"fileName": "hello.csv",
 				"folderPath": "buyer/org_equwjUP8hxcw3o5v"
 			},
 			"columnDelimiter": ",",
