@@ -7,7 +7,46 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "COMPANY_CODE",
+				"type": "varchar"
+			},
+			{
+				"name": "BUYER_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INV_TYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INV_NUMBER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INV_DATE",
+				"type": "date"
+			},
+			{
+				"name": "DUE_DATE",
+				"type": "date"
+			},
+			{
+				"name": "AMOUNT",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Balance",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "PAYMENT_METHOD ",
+				"type": "nvarchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "dbo",
 			"table": "BalanceClient"
