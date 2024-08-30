@@ -1,0 +1,26 @@
+{
+	"name": "MantuService",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://api.mantu.com/afakto/git-v1.0/api/v1.0/accounting/invoices/query",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "OAuth2ClientCredential",
+			"clientId": "VCespbhhhd4cQSSVCo0uutgZNkZosRtu",
+			"clientSecret": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "org_mantu"
+			},
+			"tokenEndpoint": "db310d124a8e428bbad43896bd13adc0"
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
