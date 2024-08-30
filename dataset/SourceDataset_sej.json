@@ -1,0 +1,33 @@
+{
+	"name": "SourceDataset_sej",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureFileStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureFileStorageLocation",
+				"fileName": "test.txt",
+				"folderPath": "aaa"
+			},
+			"columnDelimiter": ",",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Title",
+				"type": "String"
+			},
+			{
+				"name": "Value",
+				"type": "String"
+			}
+		]
+	}
+}
