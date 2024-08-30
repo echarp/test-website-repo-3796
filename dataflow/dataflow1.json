@@ -21,7 +21,8 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1"
+				"     ignoreNoFilesFound: true,",
+				"     fileList: true) ~> source1"
 			]
 		}
 	}
