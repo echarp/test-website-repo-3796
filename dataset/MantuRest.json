@@ -1,0 +1,12 @@
+{
+	"name": "MantuRest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MantuService",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
