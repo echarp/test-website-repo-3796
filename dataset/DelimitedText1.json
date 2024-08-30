@@ -2,7 +2,7 @@
 	"name": "DelimitedText1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureFileStorage3",
+			"referenceName": "AzureFileStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
