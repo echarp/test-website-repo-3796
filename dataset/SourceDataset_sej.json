@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureFileStorageLocation",
-				"fileName": "*",
+				"fileName": " ",
 				"folderPath": "aaa"
 			},
 			"columnDelimiter": ",",
