@@ -1,5 +1,5 @@
 {
-	"name": "anj",
+	"name": "anjac",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureFileStorage2",
