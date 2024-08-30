@@ -9,9 +9,7 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureFileStorageLocation",
-				"fileName": "test.txt",
-				"folderPath": "aaa"
+				"type": "AzureFileStorageLocation"
 			},
 			"columnDelimiter": ",",
 			"rowDelimiter": "\n",
