@@ -13,7 +13,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "flowlet1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          Title as string,",
@@ -21,8 +25,10 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
 				"     ignoreNoFilesFound: true,",
-				"     fileList: true) ~> source1"
+				"     fileList: true) ~> source1",
+				"source1 compose(composition: 'undefined') ~> flowlet1@()"
 			]
 		}
 	}
