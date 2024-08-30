@@ -7,10 +7,6 @@
 			"metadata": "Nom de fabrique de données",
 			"defaultValue": "data-fabricator"
 		},
-		"AnjacDB_password": {
-			"type": "secureString",
-			"metadata": "Chaîne sécurisée pour « password » de « AnjacDB »"
-		},
 		"AzureFileStorage1_connectionString": {
 			"type": "secureString",
 			"metadata": "Chaîne sécurisée pour « connectionString » de « AzureFileStorage1 »"
@@ -89,9 +85,6 @@
 					},
 					"AzurePostgreSql1_connectionString": {
 						"value": "[parameters('AzurePostgreSql1_connectionString')]"
-					},
-					"AnjacDB_password": {
-						"value": "[parameters('AnjacDB_password')]"
 					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"

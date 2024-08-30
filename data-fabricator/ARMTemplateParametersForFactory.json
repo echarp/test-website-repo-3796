@@ -5,9 +5,6 @@
 		"factoryName": {
 			"value": "data-fabricator"
 		},
-		"AnjacDB_password": {
-			"value": ""
-		},
 		"AzureFileStorage1_connectionString": {
 			"value": ""
 		},

@@ -23,10 +23,6 @@
 			"type": "secureString",
 			"metadata": "Chaîne sécurisée pour « connectionString » de « AzurePostgreSql1 »"
 		},
-		"AnjacDB_password": {
-			"type": "secureString",
-			"metadata": "Chaîne sécurisée pour « password » de « AnjacDB »"
-		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kv-fjmihhsvghnkwpb-prod.vault.azure.net/"
@@ -362,8 +358,12 @@
 					"authenticationType": "SQL",
 					"userName": "[parameters('AnjacDB_properties_typeProperties_userName')]",
 					"password": {
-						"type": "SecureString",
-						"value": "[parameters('AnjacDB_password')]"
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "org-anjac-password"
 					}
 				},
 				"connectVia": {
@@ -372,7 +372,26 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/mantu_invoice_rest')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "MantuService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/MantuService')]"
 			]
 		},
 		{
