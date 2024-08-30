@@ -10,10 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureFileStorageLocation",
-				"fileName": {
-					"value": "@concat(formatDateTime(utcnow(),'yyyy-MM-ddTHHmmss'), '.csv')",
-					"type": "Expression"
-				},
+				"fileName": "buyer.csv",
 				"folderPath": "buyer/org_equwjUP8hxcw3o5v"
 			},
 			"columnDelimiter": ",",
