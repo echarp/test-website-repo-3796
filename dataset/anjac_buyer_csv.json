@@ -1,5 +1,5 @@
 {
-	"name": "anjac_buyer",
+	"name": "anjac_buyer_csv",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureFileStorage2",

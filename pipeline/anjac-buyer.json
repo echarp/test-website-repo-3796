@@ -43,13 +43,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "anjac",
+						"referenceName": "anjac_db",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "anjac_buyer",
+						"referenceName": "anjac_buyer_csv",
 						"type": "DatasetReference"
 					}
 				]
