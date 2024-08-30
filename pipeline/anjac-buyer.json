@@ -141,12 +141,14 @@
 									"type": "String",
 									"physicalType": "String"
 								}
-							}
+							},
+							null
 						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
+							"treatBooleanAsNumber": false,
+							"dateFormat": "aaaa-MM-jj"
 						}
 					}
 				},
